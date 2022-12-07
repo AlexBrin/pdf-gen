@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example Pdf</title>
+    <style>
+        h3 {
+            text-align: center;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        /* Styles go here */
+
+        .page-header, .page-header-space {
+            height: 100px;
+        }
+
+        .page-footer, .page-footer-space {
+            height: 50px;
+
+        }
+
+        .page-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid black; /* for demo */
+            background: yellow; /* for demo */
+        }
+
+        .page-header {
+            position: fixed;
+            top: 0mm;
+            width: 100%;
+            border-bottom: 1px solid black; /* for demo */
+            background: yellow; /* for demo */
+        }
+
+        @page {
+            margin: 20mm
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+
+            button {
+                display: none;
+            }
+
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-header" style="text-align: center">
+    I'm The Header
+    <br/>
+    <button type="button" onClick="window.print()" style="background: pink">
+        PRINT ME!
+    </button>
+</div>
+
+<div class="page-footer">
+    I'm The Footer
+</div>
+
+<table>
+
+    <thead>
+    <tr>
+        <td>
+            <!--place holder for the fixed-position header-->
+            <div class="page-header-space"></div>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>
+            <table>
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Company</th>
+                    <th>Contact</th>
+                    <th>Country</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .data}}
+                <tr>
+                    <td><img width="64" height="64" src="data:image/png;base64,{{.Image}}" alt=""></td>
+                    <td>{{.Company}}</td>
+                    <td>{{.Contact}}</td>
+                    <td>{{.Country}}</td>
+                </tr>
+                {{end}}
+
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td>
+            <!--place holder for the fixed-position footer-->
+            <div class="page-footer-space"></div>
+        </td>
+    </tr>
+    </tfoot>
+
+</table>
+</body>
+</html>
